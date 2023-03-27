@@ -12,9 +12,9 @@ class MovieList extends React.Component {
 
 
                 {
-                    this.props.movies.map((movie => (
+                    this.props.movies.map((movie,i) => (
 
-                        <div className="col-lg-3 col-md-4 col-sm-6" key={movie.id}>
+                        <div className="col-lg-3 col-md-4 col-sm-6" key={i}>
                             <div className="card mb-4 shadow-sm">
                                 <img src={movie.imageURL} className="card-img-top" alt="tezxt"></img>
                                 <div className="card-body">
@@ -30,7 +30,7 @@ class MovieList extends React.Component {
                             </div>
                         </div>
 
-                    )))
+                    ))
                 }
 
 
