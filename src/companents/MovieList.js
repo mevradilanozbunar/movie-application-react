@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class MovieList extends React.Component {
 
@@ -19,10 +20,10 @@ class MovieList extends React.Component {
                                 <img src={movie.imageURL} className="card-img-top" alt="tezxt"></img>
                                 <div className="card-body">
                                     <h5 className="card-title">{movie.name}</h5>
-                                    <p className="card-text">  {movie.overview.substring(0,100)}</p>
+                                    <p className="card-text">  {movie.overview.substring(0,100)}...</p>
                                     <div className="d-flex justify-content-between align-items-center">
                                         <button type="button" className="btn btn-danger" onClick={(event)=> this.props.deleteMovieProp(movie) }>Delete</button>
-                                        <button type="button" className="btn btn-success" >Edit</button>
+                                        <Link to={`/edit/${movie.id}`} type="button" className="btn btn-primary" >Edit</Link>
 
                                         <h2><span className="badge badge-info text-primary">{movie.rating}</span></h2>
                                     </div>

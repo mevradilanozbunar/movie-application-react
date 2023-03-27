@@ -4,7 +4,7 @@ import MovieList from './MovieList';
 import axios from 'axios';
 import AddMovie from './AddMovie';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-
+import EditMovie from './EditMovie';
 
 
 class App extends React.Component {
@@ -59,6 +59,13 @@ class App extends React.Component {
         this.setState(state => ({ movies: state.movies.concat([movie]) }));
     }
 
+     // EDIT MOVIE
+     editMovie = async (id, updatedMovie) => {
+        await axios.put(`http://localhost:3002/movies/${id}`, updatedMovie)
+        this.getMovies();
+    }
+
+
     render() {
 
         let filteredMovies = this.state.movies.filter((movie) => {
@@ -91,6 +98,13 @@ class App extends React.Component {
 
                         }}
                         />}/>
+
+                        <Route path='/edit/:id' element={<EditMovie
+                         onEditMovie={(id, movie) => {
+                            this.editMovie(id, movie)
+                        }}
+                        />}/>
+
                         </Routes>      
                     </div>
 

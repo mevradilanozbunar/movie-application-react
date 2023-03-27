@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+
 
 class EditMovie extends React.Component {
 
@@ -14,7 +16,7 @@ class EditMovie extends React.Component {
 
     async componentDidMount() {
 
-        const id = this.props.match.params.id;
+        const id = window.location.pathname.replace("/edit/", "")
         //console.log(id)
 
         const response = await axios.get(`http://localhost:3002/movies/${id}`);
@@ -52,6 +54,8 @@ class EditMovie extends React.Component {
 
         const id = this.props.match.params.id;
 
+        const navigate = useNavigate();
+
         const updatedMovie = {
             name,
             rating,
@@ -60,7 +64,7 @@ class EditMovie extends React.Component {
         }
 
         this.props.onEditMovie(id, updatedMovie);
-        this.props.history.push('/');
+        navigate("/")
 
     }
 
