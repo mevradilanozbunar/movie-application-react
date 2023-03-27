@@ -21,7 +21,9 @@ class MovieList extends React.Component {
                                     <h5 className="card-title">{movie.name}</h5>
                                     <p className="card-text">  {movie.overview.substring(0,100)}</p>
                                     <div className="d-flex justify-content-between align-items-center">
-                                        <button type="button" className="btn btn-md btn-outline-danger" onClick={(event)=> this.props.deleteMovieProp(movie) }>Delete</button>
+                                        <button type="button" className="btn btn-danger" onClick={(event)=> this.props.deleteMovieProp(movie) }>Delete</button>
+                                        <button type="button" className="btn btn-success" >Edit</button>
+
                                         <h2><span className="badge badge-info text-primary">{movie.rating}</span></h2>
                                     </div>
                                 </div>

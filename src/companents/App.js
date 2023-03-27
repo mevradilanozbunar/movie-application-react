@@ -2,6 +2,14 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
 import axios from 'axios';
+import AddMovie from './AddMovie';
+import { createRoot } from "react-dom/client";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom";
 
 
 class App extends React.Component {
@@ -54,29 +62,34 @@ class App extends React.Component {
       let filteredMovies=this.state.movies.filter((movie) => {return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !==-1
       }).sort((a, b) => { return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;});
         return(
+            <BrowserRouter>
             <div>
-                    <div className="container px-4">
-                        <div className="row">
-                            <div className="col-mb-12">
-                                <SearchBar
-                                searchMovieProp={this.SearchMovie}
-                                />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-mb-12 ">
-                                <MovieList
-                                movies={filteredMovies}
-                                deleteMovieProp={this.deleteMovie}
-                                />
-                            </div>
-                        </div>
+                    <div className="container">
+                        <Route path='/' render={()=>( 
+                        <><div className="row">
+                                <div className="col">
+                                    <SearchBar
+                                        searchMovieProp={this.SearchMovie} />
+                                </div>
+                            </div><div className="row">
+                                    <div className="col">
+                                        <MovieList
+                                            movies={filteredMovies}
+                                            deleteMovieProp={this.deleteMovie} />
+                                    </div>
+                                </div></>
+                        )}>
+                       
+                        </Route>
+                        <Route path='/add'Component={AddMovie}/>
+                        
                     </div>
 
 
                
 
             </div>
+            </BrowserRouter>
         );
     }
 
