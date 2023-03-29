@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 class EditMovie extends React.Component {
@@ -12,7 +12,7 @@ class EditMovie extends React.Component {
         imageURL: ""
     }
 
-
+   
 
     async componentDidMount() {
 
@@ -52,9 +52,10 @@ class EditMovie extends React.Component {
 
         const { name, rating, overview, imageURL } = this.state;
 
-        const id = window.location.pathname.replace("/edit/", "")
+        const id = window.location.pathname.replace("/edit/", "");
 
-        const navigate = useNavigate();
+       // const navigate = useNavigate();
+              
 
         const updatedMovie = {
             name,
@@ -64,7 +65,11 @@ class EditMovie extends React.Component {
         }
 
         this.props.onEditMovie(id, updatedMovie);
-        navigate("/")
+        const navigate = useNavigate();
+        navigate("/");
+        
+
+       
 
     }
 

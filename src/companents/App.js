@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import MovieList from './MovieList';
 import axios from 'axios';
 import AddMovie from './AddMovie';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, withRouter} from 'react-router-dom';
 import EditMovie from './EditMovie';
 
 
@@ -65,6 +65,10 @@ class App extends React.Component {
         this.getMovies();
     }
 
+    async getMovies() {
+        const response = await axios.get("http://localhost:3002/movies");
+        this.setState({ movies: response.data })
+    }
 
     render() {
 
