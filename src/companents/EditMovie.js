@@ -52,7 +52,7 @@ class EditMovie extends React.Component {
 
         const { name, rating, overview, imageURL } = this.state;
 
-        const id = this.props.match.params.id;
+        const id = window.location.pathname.replace("/edit/", "")
 
         const navigate = useNavigate();
 
