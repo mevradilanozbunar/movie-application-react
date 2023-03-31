@@ -20,13 +20,17 @@ class App extends React.Component {
     //     const data = await response.json();
     //     this.setState({ movies: data })
     // }
-
+//npx json-server --watch src/api/dB.json --port 3002
     //get with axios
-    async componentDidMount() {
-        const response = await axios.get("http://localhost:3002/movies");
-        this.setState({ movies: response.data })
-    }
+    // async componentDidMount() {
+    //     const response = await axios.get("http://localhost:3002/movies");
+    //     this.setState({ movies: response.data })
+    // }
 
+    async componentDidMount() {
+        const response = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=e3dc751e20c11234caa35ab467e81f3f&language=en-US&page=1");
+        this.setState({ movies: response.data.results })
+    }
 
     //delete with fetch
     // deleteMovie = async (movie) => {
@@ -73,7 +77,7 @@ class App extends React.Component {
     render() {
 
         let filteredMovies = this.state.movies.filter((movie) => {
-            return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
+            return movie.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
         }).sort((a, b) => { return a.id < b.id ? 1 : a.id > b.id ? -1 : 0; });
         return (
             <Router>
