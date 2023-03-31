@@ -6,23 +6,36 @@ class SearchBar extends React.Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
+       
     }
     
     render() {
         return (
 
             <form onSubmit={this.handleFormSubmit}>
-                <div className="form-row">
-                    <div className="col-12https://api.themoviedb.org/3/movie/popular?api_key=e3dc751e20c11234caa35ab467e81f3f&language=en-US&page=1">
+                <div className="form-row" style={{paddingBottom: '20px'}}>
+                    <div className='row'>
+                    <div className="col-12">
                         <input
                             onChange={this.props.searchMovieProp} 
                             type="text" className="form-control"
                             placeholder="Seach a movie"
                         />
                     </div>
-                    <div className="col-4">
-                        <Link to="/add" type="button" class="btn btn-md btn-primary">Add Movie</Link>
+                        
                     </div>
+                    </div>
+                    <div className="row" style={{paddingBottom: '20px'}}>
+                        <div className='col-4'>                             
+                    </div>
+                    <div class="d-grid gap-2">
+                    <div class="btn-group mb-2 mb-md-0 btn-block">
+                             <button id="buttonPopular" onClick={(event)=> this.props.popularMoviesProp()} type="button" class="btn btn-outline-primary">Popular</button>
+                             <button onClick={(event)=> this.props.topRatedMoviesProp()} type="button" class="btn btn-outline-primary">Top Rated</button>
+							 <button onClick={(event)=> this.props.upcomingMoviesProp()} type="button" class="btn btn-outline-primary">Upcoming</button>
+								</div>
+                             
+</div>
                 </div>
             </form>
 
