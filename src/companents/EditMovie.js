@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 class EditMovie extends React.Component {
 
     state = {
-        cast:[],
-        crew:[],
+        cast: [],
+        crew: [],
         genres: [],
         movies: [],
         production_companies: [],
         production_countries: [],
-        movieVideo:"",
+        movieVideo: "",
         title: "",
         budget: "",
         overview: "",
@@ -49,17 +49,17 @@ class EditMovie extends React.Component {
 
         const video = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=e3dc751e20c11234caa35ab467e81f3f`);
         const movieVideo = video.data.results[0].key;
-        
+
         const detail = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=e3dc751e20c11234caa35ab467e81f3f&language=en-US
         `);
         const movieDetail = detail.data;
         console.log(movieDetail);
 
         this.setState({
-            cast:movieDetail.cast,
-            crew:movieDetail.crew,
+            cast: movieDetail.cast,
+            crew: movieDetail.crew,
             movies: SimilarMovies,
-            movieVideo:movieVideo,
+            movieVideo: movieVideo,
             genres: movie.genres,
             production_companies: movie.production_companies,
             production_countries: movie.production_countries,
@@ -101,17 +101,17 @@ class EditMovie extends React.Component {
     render() {
 
         const writers = this.state.crew.filter((writer) => writer.known_for_department === "Writing");
-        const Productors=this.state.crew.filter((productor) => productor.known_for_department === "Production");
-        const Directors=this.state.crew.filter((director) => director.known_for_department === "Directing");
-        const Editors=this.state.crew.filter((editor) => editor.known_for_department === "Editing");
+        const Productors = this.state.crew.filter((productor) => productor.known_for_department === "Production");
+        const Directors = this.state.crew.filter((director) => director.known_for_department === "Directing");
+        const Editors = this.state.crew.filter((editor) => editor.known_for_department === "Editing");
         const opts = {
             height: '390',
             width: '640',
             playerVars: {
-              // https://developers.google.com/youtube/player_parameters
-              autoplay: 1,
+                // https://developers.google.com/youtube/player_parameters
+                autoplay: 1,
             },
-          };
+        };
 
         return (
 
@@ -122,8 +122,9 @@ class EditMovie extends React.Component {
                 <div className="col-3">
                     <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${this.state.poster_path}`} alt="#" />
                 </div>
-                <div className="col-9" style={{ paddingBottom: '30px' }}>
+                <div className="col-8" style={{ paddingBottom: '30px' }}>
                     <h2 className="movie-title">{this.state.title}</h2>
+
                     <div className="movie-summary">
                         <p>{this.state.overview}</p>
                     </div>
@@ -161,94 +162,91 @@ class EditMovie extends React.Component {
                             ))}
                         </li>
 
-                       
+
                     </ul>
                 </div>
-                
+                <div className="col-1">
+                    <button onClick={() => window.location.href = "/"} class="btn btn-outline-primary">HomePage</button>
+                </div>
+
                 <div className='row' style={{ paddingTop: '20px' }}>
                     <div className='col-6'>
-                    <YouTube videoId={this.state.movieVideo} opts={opts} onReady={this._onReady} />
+                        <YouTube videoId={this.state.movieVideo} opts={opts} onReady={this._onReady} />
                     </div>
                     <div className='col-6'>
-                    <ul className="starring">
-                        <li>
-                            <strong>Stars: </strong>
-                            {Array.isArray(this.state.cast) && this.state.cast.map((actor, index) => (
-                                <span key={actor.id}>
-                                    {index === 0 ? actor.name : ` , ${actor.name}`}
-                                </span>
-                            ))}
-                        </li>
-                        <li>
-                            <strong>Writer: </strong>
-                            {Array.isArray(writers) && writers.map((writer, index) => (
-                                <span key={writer.id}>
-                                    {index === 0 ? writer.name : ` , ${writer.name}`}
-                                </span>
-                            ))}
-                        </li>
-                        <li>
-                            <strong>Productor: </strong>
-                            {Array.isArray(Productors) && Productors.map((producter, index) => (
-                                <span key={producter.id}>
-                                    {index === 0 ? producter.name : ` , ${producter.name}`}
-                                </span>
-                            ))}
-                        </li>
-                        <li>
-                            <strong>Director: </strong>
-                            {Array.isArray(Directors) && Directors.map((director, index) => (
-                                <span key={director.id}>
-                                    {index === 0 ? director.name : ` , ${director.name}`}
-                                </span>
-                            ))}
-                        </li>
-                        <li>
-                            <strong>Editor: </strong>
-                            {Array.isArray(Editors) && Editors.map((editor, index) => (
-                                <span key={editor.id}>
-                                    {index === 0 ? editor.name : ` , ${editor.name}`}
-                                </span>
-                            ))}
-                        </li>
+                        <ul className="starring">
+                            <li>
+                                <strong>Stars: </strong>
+                                {Array.isArray(this.state.cast) && this.state.cast.map((actor, index) => (
+                                    <span key={actor.id}>
+                                        {index === 0 ? actor.name : ` , ${actor.name}`}
+                                    </span>
+                                ))}
+                            </li>
+                            <li>
+                                <strong>Writer: </strong>
+                                {Array.isArray(writers) && writers.map((writer, index) => (
+                                    <span key={writer.id}>
+                                        {index === 0 ? writer.name : ` , ${writer.name}`}
+                                    </span>
+                                ))}
+                            </li>
+                            <li>
+                                <strong>Productor: </strong>
+                                {Array.isArray(Productors) && Productors.map((producter, index) => (
+                                    <span key={producter.id}>
+                                        {index === 0 ? producter.name : ` , ${producter.name}`}
+                                    </span>
+                                ))}
+                            </li>
+                            <li>
+                                <strong>Director: </strong>
+                                {Array.isArray(Directors) && Directors.map((director, index) => (
+                                    <span key={director.id}>
+                                        {index === 0 ? director.name : ` , ${director.name}`}
+                                    </span>
+                                ))}
+                            </li>
+                            <li>
+                                <strong>Editor: </strong>
+                                {Array.isArray(Editors) && Editors.map((editor, index) => (
+                                    <span key={editor.id}>
+                                        {index === 0 ? editor.name : ` , ${editor.name}`}
+                                    </span>
+                                ))}
+                            </li>
 
-                        
-                    </ul>
+
+                        </ul>
                     </div>
 
                 </div>
-                                
-                
+
 
                 <div className="row">
+                    {this.state.movies[0] ? (
+                        <>
+                            <h2 className="title" style={{ paddingTop: '50px' }}>Similar Movies</h2>
+                            {Array.isArray(this.state.movies) && this.state.movies.map((movie, i) => (
+                                <div style={{ paddingTop: '20px', }} className="col-lg-3 col-md-4 col-sm-6" key={i}>
+                                    <div className="card mb-4 shadow-sm">
+                                        <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`} className="card-img-top" alt="tezxt"></img>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{movie.title}</h5>
 
-                    <h2 className="title" style={{ paddingTop: '50px' }}>Similar Movies</h2>
-                    {
-                        Array.isArray(this.state.movies) && this.state.movies.map((movie, i) => (
+                                            <div className="d-flex justify-content-between align-items-center">
+                                                <button onClick={() => window.location.href = `/${movie.id}`} type="button" className="btn btn-primary">Detail</button>
 
-                            <div style={{ paddingTop: '20px', }} className="col-lg-3 col-md-4 col-sm-6" key={i}>
-                                <div className="card mb-4 shadow-sm">
-                                    <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`} className="card-img-top" alt="tezxt"></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{movie.title}</h5>
-
-                                        <div className="d-flex justify-content-between align-items-center">
-                                        <Link to={`/${movie.id}`} type="button" className="btn btn-primary" >Detail</Link>
-
-                                            <h2><span className="badge badge-info text-primary">{movie.vote_average}</span></h2>
+                                                <h2><span className="badge badge-info text-primary">{movie.vote_average}</span></h2>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                        ))
-                    }
-
-
-
-
-
+                            ))}
+                        </>
+                    ) : null}
                 </div>
+
             </div>
 
 

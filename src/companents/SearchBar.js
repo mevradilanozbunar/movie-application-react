@@ -13,8 +13,9 @@ class SearchBar extends React.Component {
         return (
 
             <form onSubmit={this.handleFormSubmit}>
-                <div className="form-row" style={{paddingBottom: '20px'}}>
+                <div className="form-row" style={{paddingBottom: '20px',paddingTop:'20px'}}>
                     <div className='row'>
+                    
                     <div className="col-12">
                         <input
                             onChange={this.props.searchMovieProp} 
